@@ -18,18 +18,4 @@ var Letter = function(letter) {
   };
 
 }
-// var test = new Letter("a");
-// console.log(test);
-// // console.log(test.character());
-// console.log(test.checkLetter("b"));
-// console.log(test.checkLetter("a"));
 module.exports = Letter;
-//we make an object with three properties for each letter in the word.
-  //the letter, an underscore, a boolean value.
-  //if true, show letter.  else, show underscore.
-
-
-  // "_ _ _ _ _"
-
-  // "a _ _ _ _"
-  // "a p p _ _"
