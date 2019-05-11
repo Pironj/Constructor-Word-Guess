@@ -3,8 +3,8 @@ var inquirer = require("inquirer");
 
 var secretWords = ["spiderman", "batman", "wonderwoman", "flash", "superman", "catwoman"];
 var currentWord = secretWords[Math.floor(Math.random() * secretWords.length)];
-var remainingGuesses = 10;
-
+var remainingGuesses = 5;
+var newWord;
 function startGame() {
   inquirer.prompt([
     {
@@ -16,10 +16,14 @@ function startGame() {
   ]).then(function(res){
     console.log(res.startGame);
 
-    switch ("startGame") {
+    switch (res.startGame) {
       case "Yes":
-      this.toString(currentWord);
-      promptUserGuess();
+      newWord = new Word(currentWord);
+      console.log(newWord);
+      console.log("\n");
+      newWord.toString();
+      console.log("\n");
+      promptUserGuess(newWord);
       break;
       case "No":
       console.log("Ok maybe another time.");
@@ -28,20 +32,46 @@ function startGame() {
     }
   })
 }
-function promptUserGuess() {
+function promptUserGuess(newWord) {
+  // console.log(newWord);
   inquirer.prompt([
     {
-      type: "text",
+      type: "input",
       name: "userGuess",
       message: "Guess a letter: ",
     }
   ]).then(function(res) {
-    // this.validate(userGuess);
-    // if (this.guess = false) {
-    //   remainingGuesses--;
-    // }
-    // if (this.guess = true) {
+    // console.log("I am the response: " + res);
+    console.log("User Guess : " + res.userGuess);
+    console.log(remainingGuesses);
+    var didItWork = newWord.validate(res.userGuess);
+    console.log(didItWork);
+    if (didItWork === false) {
+      remainingGuesses--;
+      console.log(remainingGuesses);
+    } 
+    newWord.toString(res.userGuess);
+    if (remainingGuesses > 0) {
+      promptUserGuess(newWord);
+    } else {
+      console.log("Game Over!");
+    }
+    // for (m = 0; m < newWord.length; m++) {
 
+    //   if (newWord[m].character(res.userGuess) === false) {
+    //     remainingGuesses--;
+    //     console.log("You have" + remainingGuesses + " guesses left.");
+    //   }
+    //   if (newWord[m].character(res.userGuess) === true) {
+    //     console.log(res.userGuess);
+    //     newWord.validate(res.userGuess);
+    //     console.log
+    //     promptUserGuess();
+    //   }
+    //   if (remainingGuesses < 0) {
+    //     console.log("You have lost. Try again.")
+    //     startGame();
+    //   }
     // }
   })
 }

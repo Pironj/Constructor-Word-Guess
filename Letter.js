@@ -9,13 +9,20 @@ var Letter = function(letter) {
       return "_";
     }
   };
-  this.checkLetter = function (letter) {
-    if (this.letter === letter) {
-      return this.guess = true;
-    } else {
-      return this.guess = false;
+  this.checkLetter = function (ltr) {
+    if (this.letter === ltr) {
+      this.guess = true;
+      return true;
     }
+    // console.log(letter + ": " + this.guess);
+    return false;
   };
 
 }
 module.exports = Letter;
+// var test = new Letter("a");
+// console.log(test.character());
+// test.checkLetter("a");
+// console.log(test.character());
+// test.checkLetter("p");
+// console.log(test.character());
